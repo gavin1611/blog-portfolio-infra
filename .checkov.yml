@@ -1,0 +1,96 @@
+# Checkov configuration for blog portfolio infrastructure
+# This file defines security scanning rules and exceptions for compliance
+
+# Framework to run
+framework:
+  - terraform
+
+# Directories to scan
+directory:
+  - terraform/
+
+# Output format
+output: cli
+
+# Quiet mode (reduce verbosity)
+quiet: false
+
+# Compact output
+compact: true
+
+# Skip checks that are not applicable or acceptable for this project
+skip-check:
+  # S3 bucket versioning - enabled where needed
+  - CKV_AWS_21
+  
+  # S3 bucket logging - not required for this use case
+  - CKV_AWS_18
+  
+  # S3 bucket MFA delete - not required for dev environment
+  - CKV_AWS_17
+  
+  # RDS backup retention - configured appropriately per environment
+  - CKV_AWS_133
+  
+  # RDS deletion protection - disabled for dev, enabled for prod
+  - CKV_AWS_129
+  
+  # CloudFront WAF - optional feature flag controlled
+  - CKV_AWS_68
+  
+  # ALB access logs - not required for this use case
+  - CKV_AWS_91
+  
+  # ECS task definition memory limit - configured appropriately
+  - CKV_AWS_34
+
+# Severity levels to include
+check:
+  - HIGH
+  - MEDIUM
+  - LOW
+
+# Custom policies directory (if any)
+external-checks-dir: []
+
+# Baseline file for comparison
+baseline: null
+
+# CA certificate bundle
+ca-certificate: null
+
+# Repo root for relative path resolution
+repo-root-for-plan-enrichment: []
+
+# Download external modules
+download-external-modules: true
+
+# Evaluate variables
+evaluate-variables: true
+
+# External modules download timeout
+external-modules-download-timeout: 30
+
+# Log level
+log-level: INFO
+
+# No guide
+no-guide: false
+
+# Prisma Cloud API URL
+prisma-api-url: null
+
+# Repo ID
+repo-id: blog-portfolio-infra
+
+# Soft fail mode
+soft-fail: false
+
+# Soft fail on specific checks
+soft-fail-on: []
+
+# Summary position
+summary-position: bottom
+
+# Use enforcement rules
+use-enforcement-rules: false

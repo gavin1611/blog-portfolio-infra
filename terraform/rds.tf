@@ -48,9 +48,8 @@ module "rds" {
   kms_key_id        = aws_kms_key.rds.arn
 
   # Deletion protection and final snapshot
-  deletion_protection       = var.environment == "prod" ? true : false
-  skip_final_snapshot       = var.environment == "dev" ? true : false
-  final_snapshot_identifier = var.environment == "dev" ? null : "${local.name_prefix}-final-snapshot-${formatdate("YYYY-MM-DD-hhmm", timestamp())}"
+  deletion_protection       = false
+  skip_final_snapshot       = false
 
   tags = local.common_tags
 }

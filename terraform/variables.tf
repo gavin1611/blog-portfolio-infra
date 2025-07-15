@@ -228,3 +228,16 @@ variable "github_repository" {
     error_message = "GitHub repository must be in the format: owner/repo-name."
   }
 }
+
+# ECR Image Configuration
+variable "use_placeholder_image" {
+  description = "Use placeholder image for initial deployment (set to false after first app deployment)"
+  type        = bool
+  default     = true
+}
+
+variable "placeholder_image" {
+  description = "Placeholder image to use when ECR repository is empty"
+  type        = string
+  default     = "public.ecr.aws/docker/library/nginx:alpine"
+}

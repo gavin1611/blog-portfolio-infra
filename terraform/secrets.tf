@@ -7,7 +7,7 @@
 resource "aws_secretsmanager_secret" "db_password" {
   name                    = "${local.name_prefix}/database/password"
   description             = "Database password for ${local.name_prefix}"
-  recovery_window_in_days = var.environment == "prod" ? 30 : 0
+  recovery_window_in_days = 7
 
   tags = merge(local.common_tags, {
     Name = "${local.name_prefix}-db-password"

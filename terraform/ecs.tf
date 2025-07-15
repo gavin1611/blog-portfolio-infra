@@ -139,7 +139,7 @@ resource "aws_ecs_service" "backend" {
   }
 
   # Enable execute command for debugging
-  enable_execute_command = var.environment == "dev" ? true : false
+  enable_execute_command = false
 
   depends_on = [aws_lb_listener.backend]
 

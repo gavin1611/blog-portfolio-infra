@@ -31,12 +31,6 @@ jobs:
           download_external_modules: true
           quiet: true
 
-      - name: Upload Security Scan Results
-        uses: github/codeql-action/upload-sarif@v3
-        if: always()
-        with:
-          sarif_file: checkov.sarif
-
   # Code Quality Check
   code-quality:
     runs-on: ubuntu-latest

@@ -221,6 +221,7 @@ variable "resource_cleanup_tags" {
 variable "github_repository" {
   description = "GitHub repository for OIDC authentication (format: owner/repo-name)"
   type        = string
+  default     = "gavin1611/blog-portfolio-infra"
 
   validation {
     condition     = can(regex("^[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+$", var.github_repository))

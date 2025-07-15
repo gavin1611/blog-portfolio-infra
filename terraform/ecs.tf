@@ -28,7 +28,7 @@ module "ecs" {
   # CloudWatch Log Group
   create_cloudwatch_log_group            = true
   cloudwatch_log_group_retention_in_days = 7
-  cloudwatch_log_group_kms_key_id       = aws_kms_key.ecs_logs.arn
+  cloudwatch_log_group_kms_key_id        = aws_kms_key.ecs_logs.arn
 
   tags = merge(local.common_tags, {
     Name = "${local.name_prefix}-ecs-cluster"
@@ -48,22 +48,22 @@ resource "aws_ecs_task_definition" "backend" {
   cpu                      = var.ecs_cpu
   memory                   = var.ecs_memory
   execution_role_arn       = module.iam.ecs_task_execution_role_arn
-  task_role_arn           = module.iam.ecs_task_role_arn
+  task_role_arn            = module.iam.ecs_task_role_arn
 
   container_definitions = jsonencode([
     {
       name  = "backend"
       image = "${aws_ecr_repository.backend.repository_url}:latest"
-      
+
       essential = true
-      
+
       portMappings = [
         {
           containerPort = 8080
           protocol      = "tcp"
         }
       ]
-      
+
       environment = [
         {
           name  = "PORT"
@@ -74,14 +74,14 @@ resource "aws_ecs_task_definition" "backend" {
           value = var.environment
         }
       ]
-      
+
       secrets = [
         {
           name      = "DATABASE_URL"
           valueFrom = aws_secretsmanager_secret.db_password.arn
         }
       ]
-      
+
       logConfiguration = {
         logDriver = "awslogs"
         options = {
@@ -90,7 +90,7 @@ resource "aws_ecs_task_definition" "backend" {
           "awslogs-stream-prefix" = "ecs"
         }
       }
-      
+
       healthCheck = {
         command     = ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
         interval    = 30
@@ -156,7 +156,7 @@ resource "aws_ecs_service" "backend" {
 resource "aws_cloudwatch_log_group" "ecs_backend" {
   name              = "/ecs/${local.name_prefix}-backend"
   retention_in_days = 7
-  kms_key_id       = aws_kms_key.ecs_logs.arn
+  kms_key_id        = aws_kms_key.ecs_logs.arn
 
   tags = merge(local.common_tags, {
     Name = "${local.name_prefix}-backend-logs"

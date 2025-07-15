@@ -21,9 +21,9 @@ resource "aws_budgets_budget" "monthly_cost" {
   limit_amount = var.cost_budget_limit
   limit_unit   = "USD"
   time_unit    = "MONTHLY"
-  
+
   time_period_start = formatdate("YYYY-MM-01_00:00", timestamp())
-  
+
   cost_filters = {
     Tag = [
       "Project:${var.project_name}",
@@ -33,19 +33,19 @@ resource "aws_budgets_budget" "monthly_cost" {
 
   notification {
     comparison_operator        = "GREATER_THAN"
-    threshold                 = var.budget_alert_threshold
-    threshold_type            = "PERCENTAGE"
+    threshold                  = var.budget_alert_threshold
+    threshold_type             = "PERCENTAGE"
     notification_type          = "ACTUAL"
-    subscriber_email_addresses = []  # Add email addresses for alerts
+    subscriber_email_addresses = [] # Add email addresses for alerts
     subscriber_sns_topic_arns  = [aws_sns_topic.budget_alerts.arn]
   }
 
   notification {
     comparison_operator        = "GREATER_THAN"
-    threshold                 = var.budget_alert_threshold
-    threshold_type            = "PERCENTAGE"
+    threshold                  = var.budget_alert_threshold
+    threshold_type             = "PERCENTAGE"
     notification_type          = "FORECASTED"
-    subscriber_email_addresses = []  # Add email addresses for alerts
+    subscriber_email_addresses = [] # Add email addresses for alerts
     subscriber_sns_topic_arns  = [aws_sns_topic.budget_alerts.arn]
   }
 

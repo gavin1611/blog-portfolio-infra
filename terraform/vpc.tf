@@ -27,9 +27,9 @@ module "vpc" {
   enable_dns_support   = true
 
   # Security and monitoring
-  enable_flow_log                      = true
-  create_flow_log_cloudwatch_iam_role  = true
-  create_flow_log_cloudwatch_log_group = true
+  enable_flow_log                                 = true
+  create_flow_log_cloudwatch_iam_role             = true
+  create_flow_log_cloudwatch_log_group            = true
   flow_log_cloudwatch_log_group_retention_in_days = 7
 
   # Database subnet group

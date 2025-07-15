@@ -17,7 +17,7 @@ resource "random_id" "suffix" {
 locals {
   # Naming convention: project-environment-resource-suffix
   name_prefix = "${var.project_name}-${var.environment}"
-  
+
   # Common tags for all resources
   common_tags = {
     Project     = var.project_name
@@ -32,10 +32,10 @@ locals {
 
   # AZ selection for multi-AZ deployment
   azs = slice(data.aws_availability_zones.available.names, 0, 2)
-  
+
   # CIDR blocks for VPC and subnets
   vpc_cidr = "10.0.0.0/16"
-  
+
   # Database configuration
   db_name     = replace(var.project_name, "-", "_")
   db_username = "blog_admin"

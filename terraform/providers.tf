@@ -1,7 +1,7 @@
 # Terraform and Provider Configuration
 terraform {
   required_version = ">= 1.0"
-  
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -35,9 +35,9 @@ provider "aws" {
       Owner       = var.owner
       CostCenter  = var.cost_center
       # Ephemeral infrastructure tags for easy cleanup
-      Ephemeral   = "true"
-      CreatedBy   = "terraform"
-      Repository  = "blog-portfolio-infra"
+      Ephemeral  = "true"
+      CreatedBy  = "terraform"
+      Repository = "blog-portfolio-infra"
     }
   }
 }

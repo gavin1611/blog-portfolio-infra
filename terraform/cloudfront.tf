@@ -114,9 +114,9 @@ resource "aws_cloudfront_distribution" "frontend" {
       }
     }
 
-    min_ttl     = 31536000  # 1 year
-    default_ttl = 31536000  # 1 year
-    max_ttl     = 31536000  # 1 year
+    min_ttl     = 31536000 # 1 year
+    default_ttl = 31536000 # 1 year
+    max_ttl     = 31536000 # 1 year
   }
 
   # Use only North America and Europe for cost optimization

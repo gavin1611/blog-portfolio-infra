@@ -32,8 +32,8 @@ module "rds" {
 
   # Backup configuration
   backup_retention_period = var.db_backup_retention_period
-  backup_window          = "03:00-04:00"
-  maintenance_window     = "Mon:04:00-Mon:05:00"
+  backup_window           = "03:00-04:00"
+  maintenance_window      = "Mon:04:00-Mon:05:00"
 
   # Monitoring and performance
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
@@ -43,13 +43,13 @@ module "rds" {
   create_monitoring_role          = var.enable_detailed_monitoring
 
   # Multi-AZ and encryption
-  multi_az               = var.enable_multi_az
-  storage_encrypted      = true
-  kms_key_id            = aws_kms_key.rds.arn
+  multi_az          = var.enable_multi_az
+  storage_encrypted = true
+  kms_key_id        = aws_kms_key.rds.arn
 
   # Deletion protection and final snapshot
   deletion_protection       = var.environment == "prod" ? true : false
-  skip_final_snapshot      = var.environment == "dev" ? true : false
+  skip_final_snapshot       = var.environment == "dev" ? true : false
   final_snapshot_identifier = var.environment == "dev" ? null : "${local.name_prefix}-final-snapshot-${formatdate("YYYY-MM-DD-hhmm", timestamp())}"
 
   tags = local.common_tags

@@ -197,13 +197,13 @@ output "aws_region" {
 output "estimated_monthly_cost" {
   description = "Estimated monthly cost breakdown"
   value = {
-    rds_instance     = "~$13.87/month (db.t3.micro)"
-    nat_gateway      = "~$32.40/month (single NAT gateway)"
-    alb              = "~$16.20/month (Application Load Balancer)"
-    cloudfront       = "~$1.00/month (1TB transfer)"
-    s3_storage       = "~$0.50/month (20GB storage)"
-    ecs_fargate      = "~$5.00/month (0.25 vCPU, 0.5GB RAM)"
-    total_estimated  = "~$68.97/month"
+    rds_instance       = "~$13.87/month (db.t3.micro)"
+    nat_gateway        = "~$32.40/month (single NAT gateway)"
+    alb                = "~$16.20/month (Application Load Balancer)"
+    cloudfront         = "~$1.00/month (1TB transfer)"
+    s3_storage         = "~$0.50/month (20GB storage)"
+    ecs_fargate        = "~$5.00/month (0.25 vCPU, 0.5GB RAM)"
+    total_estimated    = "~$68.97/month"
     free_tier_eligible = "RDS, S3, CloudFront, ECS Fargate (first 12 months)"
   }
 }
@@ -218,7 +218,7 @@ output "cost_optimization_notes" {
     "S3: Using Intelligent Tiering for automatic cost optimization",
     "Monitoring: Basic monitoring enabled (detailed monitoring disabled for cost savings)"
   ]
-}###########
+} ###########
 #####################################################################
 # ECS Outputs
 ################################################################################

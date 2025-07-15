@@ -24,13 +24,6 @@ resource "aws_budgets_budget" "monthly_cost" {
 
   time_period_start = formatdate("YYYY-MM-01_00:00", timestamp())
 
-  cost_filters = {
-    Tag = [
-      "Project:${var.project_name}",
-      "Environment:${var.environment}"
-    ]
-  }
-
   notification {
     comparison_operator        = "GREATER_THAN"
     threshold                  = var.budget_alert_threshold

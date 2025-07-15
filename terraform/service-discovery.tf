@@ -29,7 +29,7 @@ resource "aws_service_discovery_service" "backend" {
     routing_policy = "MULTIVALUE"
   }
 
-  health_check_grace_period_seconds = 30
+  # Health check configuration is handled by ECS service, not here
 
   tags = merge(local.common_tags, {
     Name = "${local.name_prefix}-backend-service-discovery"

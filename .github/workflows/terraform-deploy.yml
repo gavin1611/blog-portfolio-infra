@@ -13,9 +13,8 @@ on:
       - '.github/workflows/terraform-deploy.yml'
 
 env:
-  TF_CLOUD_ORGANIZATION: "your-terraform-cloud-org"
-  TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
-  TF_WORKSPACE: "blog-portfolio-prod"
+  TF_CLOUD_ORGANIZATION: "blog-terraform"
+  TF_WORKSPACE: "blog-portfolio-infra"
 
 jobs:
   # Terraform Validation and Security Scanning

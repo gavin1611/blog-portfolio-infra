@@ -29,7 +29,7 @@ This guide walks you through setting up the blog portfolio infrastructure using 
    - Click "New Workspace"
    - Choose "Version control workflow"
    - Connect to your GitHub repository (`blog-portfolio-infra`)
-   - Name the workspace: `blog-portfolio-prod`
+   - Name the workspace: `blog-portfolio-infra`
    - Set working directory to: `terraform/`
 
 3. **Configure Workspace Settings**

@@ -24,3 +24,13 @@ output "github_oidc_provider_arn" {
   description = "ARN of the GitHub OIDC provider"
   value       = aws_iam_openid_connect_provider.github.arn
 }
+
+output "terraform_cloud_role_arn" {
+  description = "ARN of the Terraform Cloud role"
+  value       = aws_iam_role.terraform_cloud_role.arn
+}
+
+output "terraform_cloud_oidc_provider_arn" {
+  description = "ARN of the Terraform Cloud OIDC provider"
+  value       = aws_iam_openid_connect_provider.terraform_cloud.arn
+}

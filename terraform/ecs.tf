@@ -133,10 +133,8 @@ resource "aws_ecs_service" "backend" {
   }
 
   # Deployment configuration
-  deployment_configuration {
-    maximum_percent         = 200
-    minimum_healthy_percent = 100
-  }
+  deployment_maximum_percent         = 200
+  deployment_minimum_healthy_percent = 100
 
   # Enable execute command for debugging
   enable_execute_command = false

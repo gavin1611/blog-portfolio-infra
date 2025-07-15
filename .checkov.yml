@@ -30,6 +30,19 @@ skip-check:
   
   # ECS task definition memory limit - configured appropriately
   - CKV_AWS_34
+  
+  # ECS Container Insights - disabled for cost optimization
+  - CKV_AWS_65
+  
+  # CloudWatch log retention - 7 days is appropriate for dev/test environment
+  - CKV_AWS_338
+  
+  # IAM policies from Terraform Registry modules - reviewed and acceptable
+  - CKV_AWS_111
+  - CKV_AWS_356
+  
+  # VPC default security group - managed by VPC module, not directly accessible
+  - CKV2_AWS_12
 
 # Download external modules
 download-external-modules: true

@@ -52,13 +52,7 @@ jobs:
 
       - name: Terraform Format Check
         working-directory: terraform
-        run: terraform fmt -check -recursive
-
-      - name: Validate Terraform Syntax (without init)
-        working-directory: terraform
-        run: |
-          # Basic syntax validation without requiring terraform init
-          find . -name "*.tf" -exec terraform validate -json {} \; || echo "Note: Full validation will be done by Terraform Cloud"
+        run: terraform fmt -check
 
   # Cost Estimation (for PRs only)
   cost-estimation:

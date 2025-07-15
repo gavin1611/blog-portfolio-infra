@@ -5,19 +5,6 @@
 framework:
   - terraform
 
-# Directories to scan
-directory:
-  - terraform/
-
-# Output format
-output: cli
-
-# Quiet mode (reduce verbosity)
-quiet: false
-
-# Compact output
-compact: true
-
 # Skip checks that are not applicable or acceptable for this project
 skip-check:
   # S3 bucket versioning - enabled where needed
@@ -44,53 +31,8 @@ skip-check:
   # ECS task definition memory limit - configured appropriately
   - CKV_AWS_34
 
-# Severity levels to include
-check:
-  - HIGH
-  - MEDIUM
-  - LOW
-
-# Custom policies directory (if any)
-external-checks-dir: []
-
-# Baseline file for comparison
-baseline: null
-
-# CA certificate bundle
-ca-certificate: null
-
-# Repo root for relative path resolution
-repo-root-for-plan-enrichment: []
-
 # Download external modules
 download-external-modules: true
 
 # Evaluate variables
 evaluate-variables: true
-
-# External modules download timeout
-external-modules-download-timeout: 30
-
-# Log level
-log-level: INFO
-
-# No guide
-no-guide: false
-
-# Prisma Cloud API URL
-prisma-api-url: null
-
-# Repo ID
-repo-id: blog-portfolio-infra
-
-# Soft fail mode
-soft-fail: false
-
-# Soft fail on specific checks
-soft-fail-on: []
-
-# Summary position
-summary-position: bottom
-
-# Use enforcement rules
-use-enforcement-rules: false

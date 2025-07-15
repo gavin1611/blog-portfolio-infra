@@ -48,8 +48,8 @@ module "rds" {
   kms_key_id        = aws_kms_key.rds.arn
 
   # Deletion protection and final snapshot
-  deletion_protection       = false
-  skip_final_snapshot       = false
+  deletion_protection = false
+  skip_final_snapshot = false
 
   tags = local.common_tags
 }

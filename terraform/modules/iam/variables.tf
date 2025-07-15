@@ -21,16 +21,7 @@ variable "github_repository" {
   type        = string
 }
 
-variable "terraform_cloud_organization" {
-  description = "Terraform Cloud organization name"
-  type        = string
-}
 
-variable "terraform_cloud_workspace" {
-  description = "Terraform Cloud workspace name"
-  type        = string
-  default     = "blog-portfolio-prod"
-}
 
 variable "tags" {
   description = "Tags to apply to all resources"

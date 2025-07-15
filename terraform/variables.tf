@@ -214,12 +214,11 @@ variable "resource_cleanup_tags" {
     AutoDestroy = "enabled"
     TTL         = "7d"
   }
-}# Gi
-tHub Actions configuration
+}
+
 variable "github_repository" {
   description = "GitHub repository for OIDC authentication (format: owner/repo-name)"
   type        = string
-  default     = "your-username/blog-portfolio-infra"
   
   validation {
     condition     = can(regex("^[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+$", var.github_repository))

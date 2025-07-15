@@ -10,10 +10,8 @@
 module "iam" {
   source = "./modules/iam"
 
-  project_name                   = var.project_name
-  aws_region                     = var.aws_region
-  github_repository              = var.github_repository
-  terraform_cloud_organization   = var.terraform_cloud_organization
-  terraform_cloud_workspace      = var.terraform_cloud_workspace
-  tags                          = local.common_tags
+  project_name      = var.project_name
+  aws_region        = var.aws_region
+  github_repository = var.github_repository
+  tags              = local.common_tags
 }

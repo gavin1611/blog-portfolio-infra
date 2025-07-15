@@ -20,7 +20,7 @@ module "vpc" {
   # Internet connectivity
   enable_nat_gateway = true
   enable_vpn_gateway = false
-  single_nat_gateway = var.environment == "dev" ? true : false # Cost optimization for dev
+  single_nat_gateway = true # Cost optimization for prod
 
   # DNS settings
   enable_dns_hostnames = true

@@ -8,7 +8,7 @@ cost_center = "engineering"
 project_name = "blog-portfolio"
 
 # GitHub repository (update with your actual repository)
-github_repository = "gavin1611/blog-portfolio-app"
+github_repository = "gavin1611/blog-portfolio-infra"
 
 # Domain configuration (optional - update with your domain)
 domain_name = ""  # Set to your custom domain if you have one

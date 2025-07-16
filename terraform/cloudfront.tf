@@ -28,6 +28,7 @@ resource "aws_cloudfront_origin_access_control" "assets" {
 resource "aws_cloudfront_distribution" "frontend" {
   # S3 Origin for frontend
   origin {
+    domain_name              = aws_s3_bucket.frontend.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.frontend.id
     origin_id                = "S3-${aws_s3_bucket.frontend.bucket}"
   }

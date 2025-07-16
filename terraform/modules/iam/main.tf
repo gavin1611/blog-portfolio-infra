@@ -92,7 +92,7 @@ resource "aws_iam_policy" "github_actions_policy" {
           "ecs:ListTaskDefinitions",
           "ecs:DescribeTasks"
         ]
-        Resource = "arn:aws:ecs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:*/*"
+        Resource = "arn:aws:ecs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:*"
       },
       # ECR permissions
       {

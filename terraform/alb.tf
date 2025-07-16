@@ -36,7 +36,8 @@ resource "aws_lb_target_group" "backend" {
     port                = "8080"
     protocol            = "HTTP"
     timeout             = 5
-    unhealthy_threshold = 2
+    unhealthy_threshold = 3
+    start_period        = 60  # Give the application 60 seconds to warm up before health checks count
   }
 
   tags = merge(local.common_tags, {

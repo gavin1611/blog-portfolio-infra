@@ -69,15 +69,51 @@ resource "aws_ecs_task_definition" "backend" {
           value = "80"
         },
         {
-          name  = "ENV"
-          value = var.environment
+          name  = "DB_HOST"
+          value = module.rds.db_instance_endpoint
+        },
+        {
+          name  = "DB_PORT"
+          value = "5432"
+        },
+        {
+          name  = "DB_NAME"
+          value = local.db_name
+        },
+        {
+          name  = "DB_USERNAME"
+          value = local.db_username
+        },
+        {
+          name  = "DB_SSL_MODE"
+          value = "require"
+        },
+        {
+          name  = "DB_MAX_CONNECTIONS"
+          value = "25"
+        },
+        {
+          name  = "DB_MAX_IDLE_CONNECTIONS"
+          value = "5"
+        },
+        {
+          name  = "AWS_REGION"
+          value = var.aws_region
+        },
+        {
+          name  = "S3_BUCKET_NAME"
+          value = aws_s3_bucket.assets.bucket
+        },
+        {
+          name  = "JWT_SECRET"
+          value = "your-production-jwt-secret-change-me"
         }
       ]
 
       secrets = [
         {
-          name      = "DATABASE_URL"
-          valueFrom = aws_secretsmanager_secret.db_password.arn
+          name      = "DB_PASSWORD"
+          valueFrom = module.rds.db_instance_master_user_secret_arn
         }
       ]
 

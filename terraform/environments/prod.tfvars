@@ -46,5 +46,5 @@ resource_cleanup_tags = {
 }
 
 # ECR Image Configuration
-use_placeholder_image = true  # Set to false after first app deployment
+use_placeholder_image = false  # Set to false after first app deployment
 placeholder_image     = "public.ecr.aws/docker/library/nginx:alpine"

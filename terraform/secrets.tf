@@ -18,13 +18,12 @@ resource "aws_secretsmanager_secret" "db_password" {
 resource "aws_secretsmanager_secret_version" "db_password" {
   secret_id = aws_secretsmanager_secret.db_password.id
   secret_string = jsonencode({
-    DB_USERNAME             = "postgres"
-    DB_PASSWORD             = "managed-by-rds" # Password is managed by RDS when using manage_master_user_password
-    DB_ENGINE               = "postgres"
-    DB_HOST                 = module.rds.db_instance_endpoint
-    DB_PORT                 = 5432
-    DB_NAME                 = local.db_name
-    # The actual password is stored in the RDS-managed secret
-    rds_secret_arn = module.rds.db_instance_master_user_secret_arn
+    DB_PASSWORD = aws_secretsmanager_secret_version.db_password.secret_string
   })
+}
+
+# Generate random database password
+resource "random_password" "db_password" {
+  length  = 32
+  special = true
 }

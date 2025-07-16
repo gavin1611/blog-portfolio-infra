@@ -23,10 +23,11 @@ module "rds" {
   # Database credentials
   db_name  = local.db_name
   username = local.db_username
+  password = random_password.db_password.result
   port     = 5432
 
   # Security
-  manage_master_user_password = true
+  manage_master_user_password = false
   vpc_security_group_ids      = [aws_security_group.rds.id]
   db_subnet_group_name        = module.vpc.database_subnet_group_name
 

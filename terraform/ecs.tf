@@ -82,7 +82,7 @@ resource "aws_ecs_task_definition" "backend" {
         },
         {
           name  = "DB_USERNAME"
-          value = local.db_username
+          value = "postgres"
         },
         {
           name  = "DB_SSL_MODE"
@@ -113,7 +113,7 @@ resource "aws_ecs_task_definition" "backend" {
       secrets = [
         {
           name      = "DB_PASSWORD"
-          valueFrom = module.rds.db_instance_master_user_secret_arn
+          valueFrom = aws_secretsmanager_secret.db_password.arn
         }
       ]
 

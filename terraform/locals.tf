@@ -8,11 +8,6 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
-# Random suffix for unique resource naming
-resource "random_id" "suffix" {
-  byte_length = 4
-}
-
 # Local values for consistent naming and configuration
 locals {
   # Naming convention: project-environment-resource-suffix

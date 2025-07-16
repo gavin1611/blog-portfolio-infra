@@ -6,7 +6,7 @@
 
 # Frontend hosting bucket
 resource "aws_s3_bucket" "frontend" {
-  bucket = "${local.name_prefix}-frontend-${random_id.suffix.hex}"
+  bucket = "${local.name_prefix}-frontend-bucket"
 
   tags = merge(local.common_tags, {
     Name = "${local.name_prefix}-frontend-bucket"
@@ -16,7 +16,7 @@ resource "aws_s3_bucket" "frontend" {
 
 # Assets bucket for images and static content
 resource "aws_s3_bucket" "assets" {
-  bucket = "${local.name_prefix}-assets-${random_id.suffix.hex}"
+  bucket = "${local.name_prefix}-assets-bucket"
 
   tags = merge(local.common_tags, {
     Name = "${local.name_prefix}-assets-bucket"

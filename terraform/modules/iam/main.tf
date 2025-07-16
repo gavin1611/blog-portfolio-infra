@@ -80,19 +80,30 @@ resource "aws_iam_policy" "github_actions_policy" {
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
-      # ECS permissions
+      # ECS permissions for service management
       {
         Effect = "Allow"
         Action = [
           "ecs:UpdateService",
           "ecs:DescribeServices",
           "ecs:DescribeClusters",
-          "ecs:DescribeTaskDefinition",
-          "ecs:RegisterTaskDefinition",
-          "ecs:ListTaskDefinitions",
           "ecs:DescribeTasks"
         ]
-        Resource = "arn:aws:ecs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:*"
+        Resource = [
+          "arn:aws:ecs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:cluster/${var.project_name}-*",
+          "arn:aws:ecs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:service/${var.project_name}-*/*",
+          "arn:aws:ecs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:task/${var.project_name}-*/*"
+        ]
+      },
+      # ECS permissions for task definitions (requires * resource)
+      {
+        Effect = "Allow"
+        Action = [
+          "ecs:DescribeTaskDefinition",
+          "ecs:RegisterTaskDefinition",
+          "ecs:ListTaskDefinitions"
+        ]
+        Resource = "*"
       },
       # ECR permissions
       {

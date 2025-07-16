@@ -262,16 +262,3 @@ output "ecr_repository_arn" {
   value       = aws_ecr_repository.backend.arn
 }
 
-################################################################################
-# Service Discovery Outputs
-################################################################################
-
-output "service_discovery_namespace_id" {
-  description = "ID of the service discovery namespace"
-  value       = aws_service_discovery_private_dns_namespace.main.id
-}
-
-output "service_discovery_service_arn" {
-  description = "ARN of the service discovery service"
-  value       = aws_service_discovery_service.backend.arn
-}

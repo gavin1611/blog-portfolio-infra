@@ -28,7 +28,6 @@ module "ecs" {
   # CloudWatch Log Group
   create_cloudwatch_log_group            = true
   cloudwatch_log_group_retention_in_days = 7
-  cloudwatch_log_group_kms_key_id        = aws_kms_key.ecs_logs.arn
 
   tags = merge(local.common_tags, {
     Name = "${local.name_prefix}-ecs-cluster"
@@ -127,10 +126,7 @@ resource "aws_ecs_service" "backend" {
     container_port   = 8080
   }
 
-  # Enable service discovery
-  service_registries {
-    registry_arn = aws_service_discovery_service.backend.arn
-  }
+
 
   # Deployment configuration
   deployment_maximum_percent         = 200
@@ -154,7 +150,6 @@ resource "aws_ecs_service" "backend" {
 resource "aws_cloudwatch_log_group" "ecs_backend" {
   name              = "/ecs/${local.name_prefix}-backend"
   retention_in_days = 7
-  kms_key_id        = aws_kms_key.ecs_logs.arn
 
   tags = merge(local.common_tags, {
     Name = "${local.name_prefix}-backend-logs"

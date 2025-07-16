@@ -12,7 +12,7 @@ module "rds" {
 
   # Database configuration
   engine               = "postgres"
-  engine_version       = "15.4"
+  engine_version       = "15.7"
   family               = "postgres15"
   major_engine_version = "15"
   instance_class       = var.db_instance_class
@@ -45,7 +45,6 @@ module "rds" {
   # Multi-AZ and encryption
   multi_az          = var.enable_multi_az
   storage_encrypted = true
-  kms_key_id        = aws_kms_key.rds.arn
 
   # Deletion protection and final snapshot
   deletion_protection = false

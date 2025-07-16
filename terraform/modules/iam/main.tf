@@ -132,8 +132,8 @@ resource "aws_iam_policy" "github_actions_policy" {
           "s3:ListBucket"
         ]
         Resource = [
-          "arn:aws:s3:::${var.project_name}-frontend-*",
-          "arn:aws:s3:::${var.project_name}-frontend-*/*"
+          "arn:aws:s3:::${var.project_name}-prod-frontend-*",
+          "arn:aws:s3:::${var.project_name}-prod-frontend-*/*"
         ]
       },
       # CloudFront permissions

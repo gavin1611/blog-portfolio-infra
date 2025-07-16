@@ -39,7 +39,9 @@ resource "aws_cloudfront_distribution" "frontend" {
     origin_id   = "ALB-${local.name_prefix}-backend"
 
     vpc_origin_config {
-      vpc_origin_id = aws_cloudfront_vpc_origin.alb_origin.id
+      vpc_origin_id            = aws_cloudfront_vpc_origin.alb_origin.id
+      origin_keepalive_timeout = 5
+      origin_read_timeout      = 30
     }
   }
 

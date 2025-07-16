@@ -10,7 +10,29 @@ resource "aws_security_group" "alb" {
   vpc_id      = module.vpc.vpc_id
   description = "Security group for Application Load Balancer"
 
-  # Ingress rules will be defined separately using aws_security_group_rule resources
+  ingress {
+    description = "HTTP from VPC"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = [local.vpc_cidr]
+  }
+
+  ingress {
+    description = "HTTP Alt Port from VPC"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = [local.vpc_cidr]
+  }
+
+  ingress {
+    description = "HTTPS from VPC"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = [local.vpc_cidr]
+  }
 
   egress {
     description = "All outbound traffic"
@@ -28,37 +50,6 @@ resource "aws_security_group" "alb" {
   lifecycle {
     create_before_destroy = true
   }
-}
-
-# ALB Security Group Rules for CloudFront VPC Origin
-resource "aws_security_group_rule" "alb_http_from_cloudfront" {
-  type                     = "ingress"
-  from_port                = 80
-  to_port                  = 80
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.alb.id
-  source_prefix_list_id    = "com.amazonaws.global.cloudfront.origin-facing"
-  description              = "HTTP from CloudFront VPC Origin"
-}
-
-resource "aws_security_group_rule" "alb_http_alt_from_cloudfront" {
-  type                     = "ingress"
-  from_port                = 8080
-  to_port                  = 8080
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.alb.id
-  source_prefix_list_id    = "com.amazonaws.global.cloudfront.origin-facing"
-  description              = "HTTP Alt Port from CloudFront VPC Origin"
-}
-
-resource "aws_security_group_rule" "alb_https_from_cloudfront" {
-  type                     = "ingress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.alb.id
-  source_prefix_list_id    = "com.amazonaws.global.cloudfront.origin-facing"
-  description              = "HTTPS from CloudFront VPC Origin"
 }
 
 # ECS Security Group

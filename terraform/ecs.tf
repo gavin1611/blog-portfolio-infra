@@ -70,7 +70,7 @@ resource "aws_ecs_task_definition" "backend" {
         },
         {
           name  = "DB_HOST"
-          value = module.rds.db_instance_endpoint
+          value = split(":", module.rds.db_instance_endpoint)[0]
         },
         {
           name  = "DB_PORT"

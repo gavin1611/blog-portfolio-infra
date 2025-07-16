@@ -28,14 +28,14 @@ resource "aws_cloudfront_origin_access_control" "assets" {
 resource "aws_cloudfront_distribution" "frontend" {
   # S3 Origin for frontend
   origin {
-    domain_name              = aws_s3_bucket.frontend.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.frontend.id
     origin_id                = "S3-${aws_s3_bucket.frontend.bucket}"
   }
 
   # ALB Origin for API via VPC Origin
   origin {
-    origin_id   = "ALB-${local.name_prefix}-backend"
+    domain_name = aws_lb.internal_alb.dns_name
+    origin_id   = "alb-origin"
 
     vpc_origin_config {
       vpc_origin_id            = aws_cloudfront_vpc_origin.alb_origin.id

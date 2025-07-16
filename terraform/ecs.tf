@@ -69,6 +69,10 @@ resource "aws_ecs_task_definition" "backend" {
           value = "80"
         },
         {
+          name  = "ENVIRONMENT"
+          value = "production"
+        },
+        {
           name  = "DB_HOST"
           value = split(":", module.rds.db_instance_endpoint)[0]
         },

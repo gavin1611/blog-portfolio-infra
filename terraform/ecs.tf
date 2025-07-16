@@ -58,7 +58,7 @@ resource "aws_ecs_task_definition" "backend" {
 
       portMappings = [
         {
-          containerPort = 80
+          containerPort = 8080
           protocol      = "tcp"
         }
       ]
@@ -66,7 +66,7 @@ resource "aws_ecs_task_definition" "backend" {
       environment = [
         {
           name  = "PORT"
-          value = "80"
+          value = "8080"
         },
         {
           name  = "ENVIRONMENT"
@@ -131,7 +131,7 @@ resource "aws_ecs_task_definition" "backend" {
       }
 
       healthCheck = {
-        command     = ["CMD-SHELL", "curl -f http://localhost:80/health || exit 1"]
+        command     = ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
         interval    = 30
         timeout     = 5
         retries     = 3
@@ -163,7 +163,7 @@ resource "aws_ecs_service" "backend" {
   load_balancer {
     target_group_arn = aws_lb_target_group.backend.arn
     container_name   = "backend"
-    container_port   = 80
+    container_port   = 8080
   }
 
 

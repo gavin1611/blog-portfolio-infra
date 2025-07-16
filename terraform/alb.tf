@@ -22,7 +22,7 @@ resource "aws_lb" "main" {
 # ALB Target Group
 resource "aws_lb_target_group" "backend" {
   name        = "${local.name_prefix}-backend-tg"
-  port        = 80
+  port        = 8080
   protocol    = "HTTP"
   vpc_id      = module.vpc.vpc_id
   target_type = "ip"
@@ -33,7 +33,7 @@ resource "aws_lb_target_group" "backend" {
     interval            = 30
     matcher             = "200"
     path                = "/health"
-    port                = "traffic-port"
+    port                = "8080"
     protocol            = "HTTP"
     timeout             = 5
     unhealthy_threshold = 2

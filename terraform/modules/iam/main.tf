@@ -201,6 +201,35 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
+# ECS Task Execution Role Policy for Secrets Manager
+resource "aws_iam_policy" "ecs_task_execution_secrets_policy" {
+  name        = "${var.project_name}-ecs-task-execution-secrets-policy"
+  description = "Policy for ECS task execution role to access Secrets Manager"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "secretsmanager:GetSecretValue"
+        ]
+        Resource = [
+          "arn:aws:secretsmanager:${var.aws_region}:${data.aws_caller_identity.current.account_id}:secret:${var.project_name}/*"
+        ]
+      }
+    ]
+  })
+
+  tags = var.tags
+}
+
+# Attach Secrets Manager policy to ECS Task Execution Role
+resource "aws_iam_role_policy_attachment" "ecs_task_execution_secrets_policy_attachment" {
+  role       = aws_iam_role.ecs_task_execution_role.name
+  policy_arn = aws_iam_policy.ecs_task_execution_secrets_policy.arn
+}
+
 # ECS Task Role for application
 resource "aws_iam_role" "ecs_task_role" {
   name = "${var.project_name}-ecs-task-role"

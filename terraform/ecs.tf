@@ -86,11 +86,11 @@ resource "aws_ecs_task_definition" "backend" {
         },
         {
           name  = "DB_USERNAME"
-          value = local.db_username
+          value = "postgres"
         },
         {
           name  = "DB_SSL_MODE"
-          value = "require"
+          value = "none"
         },
         {
           name  = "DB_MAX_CONNECTIONS"

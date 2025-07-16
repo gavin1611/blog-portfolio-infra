@@ -30,14 +30,13 @@ resource "aws_lb_target_group" "backend" {
   health_check {
     enabled             = true
     healthy_threshold   = 2
-    interval            = 30
+    interval            = 60            # Increased from 30 to 45 seconds
     matcher             = "200"
     path                = "/health"
     port                = "8080"
     protocol            = "HTTP"
-    timeout             = 5
-    unhealthy_threshold = 3
-    start_period        = 60  # Give the application 60 seconds to warm up before health checks count
+    timeout             = 20            # Increased from 5 to 10 seconds
+    unhealthy_threshold = 2             # Increased from 3 to 5
   }
 
   tags = merge(local.common_tags, {

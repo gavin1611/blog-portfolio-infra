@@ -2,7 +2,7 @@
 
 output "developer_role_arn" {
   description = "ARN of the developer role"
-  value       = aws_iam_role.developer_role.arn
+  value       = var.developer_user_arn != "" ? aws_iam_role.developer_role[0].arn : null
 }
 
 output "github_actions_role_arn" {

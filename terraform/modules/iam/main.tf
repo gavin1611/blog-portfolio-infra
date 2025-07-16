@@ -2,7 +2,8 @@
 
 # Developer IAM role with PowerUser permissions
 resource "aws_iam_role" "developer_role" {
-  name = "${var.project_name}-developer-role"
+  count = var.developer_user_arn != "" ? 1 : 0
+  name  = "${var.project_name}-developer-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -22,7 +23,8 @@ resource "aws_iam_role" "developer_role" {
 
 # Attach PowerUser policy to developer role
 resource "aws_iam_role_policy_attachment" "developer_poweruser" {
-  role       = aws_iam_role.developer_role.name
+  count      = var.developer_user_arn != "" ? 1 : 0
+  role       = aws_iam_role.developer_role[0].name
   policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
 }
 
@@ -44,7 +46,7 @@ resource "aws_iam_role" "github_actions_role" {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           }
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:${var.github_repository}:*"
+            "token.actions.githubusercontent.com:sub" = "repo:gavin1611/blog-portfolio-app:*"
           }
         }
       }

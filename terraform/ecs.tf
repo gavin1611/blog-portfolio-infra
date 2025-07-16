@@ -90,7 +90,7 @@ resource "aws_ecs_task_definition" "backend" {
         },
         {
           name  = "DB_SSL_MODE"
-          value = "none"
+          value = "disable"
         },
         {
           name  = "DB_MAX_CONNECTIONS"

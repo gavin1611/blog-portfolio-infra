@@ -36,7 +36,7 @@ resource "aws_cloudfront_distribution" "frontend" {
   # ALB Origin for API via VPC Origin
   origin {
     domain_name = aws_lb.main.dns_name
-    origin_id   = "alb-origin"
+    origin_id   = "ALB-${local.name_prefix}-backend"
 
     vpc_origin_config {
       vpc_origin_id            = aws_cloudfront_vpc_origin.alb_origin.id

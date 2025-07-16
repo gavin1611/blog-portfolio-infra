@@ -82,7 +82,7 @@ resource "aws_ecs_task_definition" "backend" {
         },
         {
           name  = "DB_USERNAME"
-          value = "postgres"
+          value = local.db_username
         },
         {
           name  = "DB_SSL_MODE"

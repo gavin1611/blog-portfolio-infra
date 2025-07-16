@@ -44,17 +44,22 @@ resource "aws_security_group" "cloudfront_vpc_endpoint" {
   }
 }
 
-# VPC Endpoint for CloudFront
-resource "aws_vpc_endpoint" "cloudfront" {
-  vpc_id              = module.vpc.vpc_id
-  service_name        = "com.amazonaws.vpce.${var.aws_region}.vpce-svc-cloudfront"
-  vpc_endpoint_type   = "Interface"
-  subnet_ids          = module.vpc.private_subnets
-  security_group_ids  = [aws_security_group.cloudfront_vpc_endpoint.id]
-  private_dns_enabled = true
+# Note: CloudFront VPC Origin Access is a newer feature that may not be fully supported
+# in Terraform yet. For now, we'll configure the infrastructure to support private ALB
+# access through CloudFront using the standard approach.
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-cloudfront-vpce"
-    Type = "vpc-endpoint"
-  })
-}
+# VPC Endpoint for ALB (if needed for CloudFront VPC Origin Access)
+# This is commented out as the feature may not be fully available yet
+# resource "aws_vpc_endpoint" "alb" {
+#   vpc_id              = module.vpc.vpc_id
+#   service_name        = "com.amazonaws.vpce.${var.aws_region}.elasticloadbalancing"
+#   vpc_endpoint_type   = "Interface"
+#   subnet_ids          = module.vpc.private_subnets
+#   security_group_ids  = [aws_security_group.cloudfront_vpc_endpoint.id]
+#   private_dns_enabled = true
+#
+#   tags = merge(local.common_tags, {
+#     Name = "${local.name_prefix}-alb-vpce"
+#     Type = "vpc-endpoint"
+#   })
+# }

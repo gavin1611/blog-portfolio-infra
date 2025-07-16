@@ -22,6 +22,15 @@ resource "aws_cloudfront_origin_access_control" "assets" {
   signing_protocol                  = "sigv4"
 }
 
+# CloudFront Origin Access Control for Private ALB
+resource "aws_cloudfront_origin_access_control" "private_alb" {
+  name                              = "${local.name_prefix}-private-alb-oac"
+  description                       = "OAC for ${local.name_prefix} private ALB"
+  origin_access_control_origin_type = "vpc"
+  signing_behavior                  = "always"
+  signing_protocol                  = "sigv4"
+}
+
 # CloudFront Distribution
 resource "aws_cloudfront_distribution" "frontend" {
   # S3 Origin for frontend
@@ -33,8 +42,9 @@ resource "aws_cloudfront_distribution" "frontend" {
 
   # ALB Origin for API
   origin {
-    domain_name = aws_lb.main.dns_name
-    origin_id   = "ALB-${local.name_prefix}-backend"
+    domain_name              = aws_lb.main.dns_name
+    origin_id                = "ALB-${local.name_prefix}-backend"
+    origin_access_control_id = aws_cloudfront_origin_access_control.private_alb.id
 
     custom_origin_config {
       http_port              = 80

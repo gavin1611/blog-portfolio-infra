@@ -6,10 +6,10 @@
 
 resource "aws_lb" "main" {
   name               = "${local.name_prefix}-alb"
-  internal           = false
+  internal           = true
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb.id]
-  subnets            = module.vpc.public_subnets
+  subnets            = module.vpc.private_subnets
 
   enable_deletion_protection = false
 

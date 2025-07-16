@@ -90,7 +90,7 @@ resource "aws_ecs_task_definition" "backend" {
         },
         {
           name  = "DB_SSL_MODE"
-          value = "disable"
+          value = "require"
         },
         {
           name  = "DB_MAX_CONNECTIONS"
@@ -117,7 +117,7 @@ resource "aws_ecs_task_definition" "backend" {
       secrets = [
         {
           name      = "DB_PASSWORD"
-          valueFrom = aws_secretsmanager_secret_version.db_password.arn
+          valueFrom = aws_secretsmanager_secret.db_password.arn
         }
       ]
 

@@ -33,16 +33,13 @@ resource "aws_cloudfront_distribution" "frontend" {
     origin_id                = "S3-${aws_s3_bucket.frontend.bucket}"
   }
 
-  # ALB Origin for API
+  # ALB Origin for API via VPC Origin
   origin {
-    domain_name = aws_lb.main.dns_name
+    domain_name = aws_cloudfront_vpc_origin.alb_origin.domain_name
     origin_id   = "ALB-${local.name_prefix}-backend"
 
-    custom_origin_config {
-      http_port              = 80
-      https_port             = 443
-      origin_protocol_policy = "http-only"
-      origin_ssl_protocols   = ["TLSv1.2"]
+    vpc_origin_config {
+      vpc_origin_id = aws_cloudfront_vpc_origin.alb_origin.id
     }
   }
 

@@ -11,96 +11,27 @@ resource "aws_security_group" "alb" {
   description = "Security group for Application Load Balancer"
 
   ingress {
-    description = "HTTP from CloudFront"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    # CloudFront IP ranges - these are the current ranges but should be updated periodically
-    cidr_blocks = [
-      "13.32.0.0/15",
-      "13.35.0.0/16",
-      "18.238.0.0/15",
-      "52.84.0.0/15",
-      "54.182.0.0/16",
-      "54.192.0.0/16",
-      "54.230.0.0/16",
-      "54.239.128.0/18",
-      "54.239.192.0/19",
-      "54.240.128.0/18",
-      "99.84.0.0/16",
-      "130.176.0.0/16",
-      "204.246.164.0/22",
-      "204.246.168.0/22",
-      "204.246.174.0/23",
-      "204.246.176.0/20",
-      "205.251.192.0/19",
-      "205.251.249.0/24",
-      "205.251.250.0/23",
-      "205.251.252.0/23",
-      "205.251.254.0/24"
-    ]
+    description           = "HTTP from CloudFront VPC Origin"
+    from_port             = 80
+    to_port               = 80
+    protocol              = "tcp"
+    source_prefix_list_id = "com.amazonaws.global.cloudfront.origin-facing"
   }
 
   ingress {
-    description = "HTTP Alt Port from CloudFront"
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    # CloudFront IP ranges
-    cidr_blocks = [
-      "13.32.0.0/15",
-      "13.35.0.0/16",
-      "18.238.0.0/15",
-      "52.84.0.0/15",
-      "54.182.0.0/16",
-      "54.192.0.0/16",
-      "54.230.0.0/16",
-      "54.239.128.0/18",
-      "54.239.192.0/19",
-      "54.240.128.0/18",
-      "99.84.0.0/16",
-      "130.176.0.0/16",
-      "204.246.164.0/22",
-      "204.246.168.0/22",
-      "204.246.174.0/23",
-      "204.246.176.0/20",
-      "205.251.192.0/19",
-      "205.251.249.0/24",
-      "205.251.250.0/23",
-      "205.251.252.0/23",
-      "205.251.254.0/24"
-    ]
+    description           = "HTTP Alt Port from CloudFront VPC Origin"
+    from_port             = 8080
+    to_port               = 8080
+    protocol              = "tcp"
+    source_prefix_list_id = "com.amazonaws.global.cloudfront.origin-facing"
   }
 
   ingress {
-    description = "HTTPS from CloudFront"
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    # CloudFront IP ranges
-    cidr_blocks = [
-      "13.32.0.0/15",
-      "13.35.0.0/16",
-      "18.238.0.0/15",
-      "52.84.0.0/15",
-      "54.182.0.0/16",
-      "54.192.0.0/16",
-      "54.230.0.0/16",
-      "54.239.128.0/18",
-      "54.239.192.0/19",
-      "54.240.128.0/18",
-      "99.84.0.0/16",
-      "130.176.0.0/16",
-      "204.246.164.0/22",
-      "204.246.168.0/22",
-      "204.246.174.0/23",
-      "204.246.176.0/20",
-      "205.251.192.0/19",
-      "205.251.249.0/24",
-      "205.251.250.0/23",
-      "205.251.252.0/23",
-      "205.251.254.0/24"
-    ]
+    description           = "HTTPS from CloudFront VPC Origin"
+    from_port             = 443
+    to_port               = 443
+    protocol              = "tcp"
+    source_prefix_list_id = "com.amazonaws.global.cloudfront.origin-facing"
   }
 
   egress {

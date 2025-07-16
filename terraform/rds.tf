@@ -22,7 +22,7 @@ module "rds" {
 
   # Database credentials
   db_name  = local.db_name
-  username = local.db_username
+  username = "postgres"
   password = random_password.db_password.result
   port     = 5432
 
